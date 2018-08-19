@@ -1,0 +1,3 @@
+rootProject.name = 'KeralaRescueApp'
+
+include ':app'
