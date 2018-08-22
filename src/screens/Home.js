@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Image, TouchableHighlight} from 'react-native';
+import {StyleSheet, View, Image, TouchableHighlight, ImageBackground} from 'react-native';
+ 
 
 export default class Home extends Component{
+    bigBtnClickHandler = () =>{
+        
+    }
     render(){
         return(
             <View style={styles.main}>
+            <ImageBackground source={ require('../../res/img/bg_res.jpg')} style={styles.ImgBg}>
+
                 <View style={styles.header}>
                     <TouchableHighlight style={styles.touchable_big}>
                         <Image
@@ -14,7 +20,10 @@ export default class Home extends Component{
                     </TouchableHighlight>
 
                 <View style={styles.body_lays}>
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableHighlight 
+                    style={styles.touchable_g} 
+                    onPress={()=> this.props.navgation.navigate('Needhelp')}
+                    >
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/needhelp.png')}
@@ -65,6 +74,7 @@ export default class Home extends Component{
                     </TouchableHighlight>
 
                 </View>
+                </ImageBackground>
             </View>
         );
     }
@@ -72,7 +82,7 @@ export default class Home extends Component{
 
 const styles = StyleSheet.create({
     main:{
-        alignItems:'center'
+        justifyContent:'center'
     },
     header:{ 
         height:"68%", 
@@ -81,26 +91,33 @@ const styles = StyleSheet.create({
     body_lays:{
         flexDirection: 'row',
         width:"80%",
-        justifyContent : 'center',
+        alignSelf : 'center',
 
     },
-    img_btn:{  
-        padding:10,
-        paddingBottom:5
-    },
-    img_big_btn:{   
-        marginTop:"28%",
-        
-    },
+
+
     touchable_g:{
         width:"50%",
         padding:10,
         flex: 1,
         alignItems:'center',
-        borderColor:"white"
+        borderColor:"white", 
+    },
+    img_btn:{  
+        padding:10,
+        paddingBottom:5,
+        
+    },
+    img_big_btn:{   
+        marginTop:"28%",  
     },
     touchable_big:{
         width:"80%",
         alignItems:'center'
-    }
+    },
+    ImgBg:{
+        width:"100%",
+        height:"100%",
+      }
 });
+

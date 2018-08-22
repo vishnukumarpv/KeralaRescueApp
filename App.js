@@ -5,6 +5,7 @@
  */
 
 import React, { Component } from 'react';
+import { createStackNavigator } from 'react-navigation';
 import {
   Platform,
   StyleSheet,
@@ -14,8 +15,10 @@ import {
 } from 'react-native';
 
 import Home from './src/screens/Home';
+import Needhelp from './src/screens/Needhelp';
+import ICanHelp from './src/screens/ICanHelp';
   
-export default class App extends Component {
+/* export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -38,4 +41,30 @@ const styles = StyleSheet.create({
     width:"100%",
     height:"100%",
   }
+}); */
+
+const RootStack = createStackNavigator(
+  {
+    Home: { screen: Home},
+    Needhelp: { screen: Needhelp},
+    ICanHelp: { screen: ICanHelp}
+  },
+  {
+    initialRouteName: 'ICanHelp',
+  }
+);
+
+/* const RootStack = createStackNavigator({
+  Home: {
+    screen: Home
+  },
+  Needhelp:{
+    screen: Needhelp
+  }
 });
+ */
+export default class App extends React.Component {
+  render() {
+    return <RootStack />;
+  }
+}
