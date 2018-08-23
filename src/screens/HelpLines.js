@@ -23,7 +23,7 @@ import {
                             {this.props.name}
                             </Text>
                             <Text style={{ fontSize:17 }}>
-                                {this.props.address}
+                                {this.props.position}
                             </Text>
                         </View>
                         <View style={{ width: 100, flexDirection: 'row', alignContent:'flex-end'}}>
@@ -35,12 +35,7 @@ import {
                             </TouchableHighlight>
                         </View> 
                 </View>
-
-                <View  style={{width:"100%", flex:1}}>
-                <Text>
-                    {this.props.needs}
-                </Text>
-                </View>
+ 
               </View>
             </TouchableOpacity>
           );
@@ -52,7 +47,7 @@ import {
 
 
 
-export default class ICanHelp extends Component{
+export default class HelpLines extends Component{
 
     static navigationOptions = {
         title: 'Home',
@@ -84,7 +79,10 @@ export default class ICanHelp extends Component{
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
-            } 
+            },
+            body:{
+                get:'positions'
+            }
           }).then((response) => response.json())
               .then((responseJson) => {  
                   this.setState({data: responseJson, loaded: true});
@@ -107,8 +105,7 @@ export default class ICanHelp extends Component{
             <PersonsListItem
             // id={item.id}  
             name={item.name}
-            address={item.address}
-            needs={item.needs}
+            position={item.position} 
             />
     ) 
     

@@ -17,6 +17,7 @@ import {
 import Home from './src/screens/Home';
 import Needhelp from './src/screens/Needhelp';
 import ICanHelp from './src/screens/ICanHelp';
+import HelpLines from './src/screens/HelpLines';
   
 /* export default class App extends Component {
   render() {
@@ -47,10 +48,11 @@ const RootStack = createStackNavigator(
   {
     Home: { screen: Home},
     Needhelp: { screen: Needhelp},
-    ICanHelp: { screen: ICanHelp}
+    ICanHelp: { screen: ICanHelp},
+    HelpLines: { screen: HelpLines},
   },
   {
-    initialRouteName: 'ICanHelp',
+    initialRouteName: 'Needhelp',
   }
 );
 
@@ -64,6 +66,7 @@ const RootStack = createStackNavigator(
 });
  */
 export default class App extends React.Component {
+
   render() {
     return <RootStack />;
   }

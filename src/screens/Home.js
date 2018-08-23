@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Image, TouchableHighlight, ImageBackground} from 'react-native';
- 
+import {StyleSheet, View, Image, TouchableHighlight, ImageBackground,TouchableOpacity} from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 
 export default class Home extends Component{
-    bigBtnClickHandler = () =>{
-        
-    }
+    static navigationOptions = { header: null };
     render(){
         return(
             <View style={styles.main}>
@@ -20,15 +18,15 @@ export default class Home extends Component{
                     </TouchableHighlight>
 
                 <View style={styles.body_lays}>
-                    <TouchableHighlight 
+                    <TouchableOpacity 
                     style={styles.touchable_g} 
-                    onPress={()=> this.props.navgation.navigate('Needhelp')}
+                    onPress={() => this.props.navigation.navigate('Needhelp')} 
                     >
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/needhelp.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                     <TouchableHighlight style={styles.touchable_g}>
                         <Image

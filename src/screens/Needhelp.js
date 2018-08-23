@@ -5,7 +5,8 @@ import {
       ImageBackground,
       TextInput,
       ScrollView,
-      TouchableHighlight
+      TouchableHighlight,
+      Picker
     } from 'react-native';
  
 
@@ -18,6 +19,7 @@ export default class Needhelp extends Component{
         super(props);
         this.state = {
           text: '',
+          language: ''
         };
       }
 
@@ -37,7 +39,14 @@ export default class Needhelp extends Component{
                     </TouchableHighlight>
                     
                     <Text style={styles.label}>District</Text>
-                    <TextInput style={styles.input}/>
+                    <Picker 
+                         itemStyle={{backgroundColor:'white'}} 
+                        onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
+                        <Picker.Item label="Java" value="java" />
+                        <Picker.Item label="JavaScript" value="js" />
+                    </Picker>
+
+                    {/* <TextInput style={styles.input}/> */}
 
                     <Text style={styles.label}>Address line #1</Text>
                     <TextInput style={styles.input}/>
