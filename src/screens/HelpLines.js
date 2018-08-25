@@ -48,9 +48,9 @@ import {
 
 
 export default class HelpLines extends Component{
-
-    static navigationOptions = {
-        title: 'Home',
+ 
+      static navigationOptions = {
+        title: 'Help lines',
         headerStyle: {
           backgroundColor: '#000',
         },
@@ -59,6 +59,7 @@ export default class HelpLines extends Component{
           fontWeight: 'bold',
         },
       };
+      
       
     constructor(props) {
         super(props);
@@ -80,9 +81,9 @@ export default class HelpLines extends Component{
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body:{
-                get:'positions'
-            }
+            body:JSON.stringify({
+                method:'positions'
+            })
           }).then((response) => response.json())
               .then((responseJson) => {  
                   this.setState({data: responseJson, loaded: true});

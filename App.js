@@ -52,7 +52,7 @@ const RootStack = createStackNavigator(
     HelpLines: { screen: HelpLines},
   },
   {
-    initialRouteName: 'Needhelp',
+    initialRouteName: 'Home',
   }
 );
 

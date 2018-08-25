@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { TouchableHighlight, View, Image } from 'react-native';
+import { TouchableHighlight, Image } from 'react-native';
 
-class CustomButton extends Component {
+export class CustomsComponent2 extends Component {
+  componentName = 'CustomsComponent2';
     render() {
         return (
         <TouchableHighlight > 

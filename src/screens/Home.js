@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Image, TouchableHighlight, ImageBackground,TouchableOpacity} from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import {StyleSheet, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
+ 
 
 export default class Home extends Component{
     static navigationOptions = { header: null };
@@ -10,12 +10,12 @@ export default class Home extends Component{
             <ImageBackground source={ require('../../res/img/bg_res.jpg')} style={styles.ImgBg}>
 
                 <View style={styles.header}>
-                    <TouchableHighlight style={styles.touchable_big}>
+                    <TouchableOpacity style={styles.touchable_big}>
                         <Image
                         style={styles.img_big_btn}  
                         source={require('../../res/img/help.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 <View style={styles.body_lays}>
                     <TouchableOpacity 
@@ -28,48 +28,50 @@ export default class Home extends Component{
                         />
                     </TouchableOpacity>
 
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableOpacity style={styles.touchable_g}
+                    onPress={() => this.props.navigation.navigate('ICanHelp')} >
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/canhelp.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 </View>
 
                 </View>
 
                 <View style={styles.body_lays}>
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableOpacity style={styles.touchable_g}>
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/donate.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableOpacity style={styles.touchable_g}
+                    onPress={() => this.props.navigation.navigate('HelpLines')}>
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/helpline.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 </View>
 
                 <View style={styles.body_lays}>
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableOpacity style={styles.touchable_g}>
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/volunteer.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
-                    <TouchableHighlight style={styles.touchable_g}>
+                    <TouchableOpacity style={styles.touchable_g}>
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/camps.png')}
                         />
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 </View>
                 </ImageBackground>

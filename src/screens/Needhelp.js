@@ -5,7 +5,7 @@ import {
       ImageBackground,
       TextInput,
       ScrollView,
-      TouchableHighlight,
+      TouchableOpacity,
       Picker
     } from 'react-native';
  
@@ -14,48 +14,119 @@ import {
 
 
 export default class Needhelp extends Component{
-
+    static navigationOptions = {
+        title: 'I need help',
+        headerStyle: {
+          backgroundColor: '#000',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      };
+      
     constructor(props) {
         super(props);
-        this.state = {
-          text: '',
-          language: ''
+        this.state = { 
+          district: '',
+          address1:'',
+          address2:'',
+          city:'',
+          needs:'',
+
+          districts: ['kollam','trivandrum','pathanamthitta','alappuzha'],
         };
       }
 
-    bigBtnClickHandler = () =>{
+      _onSubmit = () =>{
+
+        if (this.state.address1 == ''){
+            alert('Enter the address line');
+            return;
+        }
         
-    }
+        if (this.state.address2 == ''){
+            alert('Enter the address line 2');
+            return;
+        }
+        if (this.state.city == ''){
+            alert('Enter the address city');
+            return;
+        }
+        if (this.state.needs == ''){
+            alert('Enter the address needs');
+            return;
+        }
+
+
+        fetch('http://169.254.180.17/test.php', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body:JSON.stringify({
+                method      :   'helprequest',
+                address1    :   this.state.address1,
+                address2    :   this.state.address2,
+                city        :   this.state.city,
+                needs       :   this.state.needs
+            }),
+          }).then((response) => response.json())
+               
+              .catch((error) => {
+                console.error(error);
+              });
+      }
+
+     
+
+ 
     render(){
         return(
-            <View style={styles.main}>
             <ImageBackground source={ require('../../res/img/bg_res.jpg')} style={styles.ImgBg}>
+            <View style={styles.main}>
+            
                 <ScrollView style={styles.body}>
-                    <TouchableHighlight style={{ alignItems:'center' }}>
+                    <TouchableOpacity style={{ alignItems:'center' }}>
                     <View>
                         <Image source={require('../../res/img/location.png')}/>
                         <Text>Locate with GPS</Text>
                     </View>
-                    </TouchableHighlight>
+                    </TouchableOpacity>
                     
                     <Text style={styles.label}>District</Text>
                     <Picker 
-                         itemStyle={{backgroundColor:'white'}} 
-                        onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}>
-                        <Picker.Item label="Java" value="java" />
-                        <Picker.Item label="JavaScript" value="js" />
+                        selectedValue={this.state.district}
+                        style={{backgroundColor:'white'}} 
+                        itemStyle={{backgroundColor:'white'}} 
+                        onValueChange={(itemValue, itemIndex) => this.setState({district: itemValue})}>
+
+                        <Picker.Item label="Kollam" value="kollam" />
+                        <Picker.Item label="Trivandrum" value="trivandrum" />
+                        <Picker.Item label="Kozhikkodu" value="kozhikkodu" />
+                        <Picker.Item label="Alappuzha" value="alappuzha" />
                     </Picker>
 
                     {/* <TextInput style={styles.input}/> */}
 
                     <Text style={styles.label}>Address line #1</Text>
-                    <TextInput style={styles.input}/>
+                    <TextInput style={styles.input} 
+                    onChangeText={(address1) => this.setState({address1})}
+                    value={this.state.address1}
+                    />
   
                     <Text style={styles.label}>Address line #2</Text>
-                    <TextInput style={styles.input}/>
+                    <TextInput style={styles.input} 
+                    onChangeText={(address2) => this.setState({address2})}
+                    value={this.state.address2}
+                    />
 
                     <Text style={styles.label}>city/ Village</Text>
-                    <TextInput style={styles.input}/>
+                    <TextInput style={styles.input} 
+                    onChangeText={(city) => this.setState({city})}
+                    value={this.state.city}
+                    />
 
                     <Text style={styles.label}>Needs</Text>
 
@@ -67,28 +138,33 @@ export default class Needhelp extends Component{
              editable = {true}
               maxLength = {140} 
               multiline = {true}
-              numberOfLines = {4}
-              onChangeText={(text) => this.setState({text})}
-              value={this.state.text}
+              numberOfLines = {4} 
+               
+              onChangeText={(needs) => this.setState({needs})}
+              value={this.state.needs}
+              
             />
                  
 
                 
                     
-                    <TouchableHighlight > 
+                    <TouchableOpacity onPress={this._onSubmit}> 
                         <Image style={{ width:'100%', borderRadius:5, marginTop:8 }} source={require('../../res/img/submit.png')}/> 
-                    </TouchableHighlight>
+                    </TouchableOpacity>
 
                 </ScrollView>
-            </ImageBackground>
+            
             </View>
+            </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
     main:{
-        justifyContent:'center'
+        justifyContent:'center',
+        height:"90%",
+        marginBottom:20
     },
     ImgBg:{
         width:"100%",
@@ -100,7 +176,7 @@ const styles = StyleSheet.create({
         padding:15, 
         backgroundColor:"white",
         alignSelf : 'center',
-        width:"90%", 
+        width:"96%", 
         height:50,
         borderRadius:5
     },

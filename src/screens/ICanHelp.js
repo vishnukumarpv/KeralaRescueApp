@@ -55,7 +55,7 @@ import {
 export default class ICanHelp extends Component{
 
     static navigationOptions = {
-        title: 'Home',
+        title: 'I can help',
         headerStyle: {
           backgroundColor: '#000',
         },
@@ -84,7 +84,10 @@ export default class ICanHelp extends Component{
             headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
-            } 
+            },
+             body:JSON.stringify({
+                method:'needs'
+            })
           }).then((response) => response.json())
               .then((responseJson) => {  
                   this.setState({data: responseJson, loaded: true});
@@ -114,8 +117,9 @@ export default class ICanHelp extends Component{
     
     render(){
         return(
-            <View style={styles.main}>
             <ImageBackground source={ require('../../res/img/bg_res.jpg')} style={styles.ImgBg}>
+            <View style={styles.main}>
+            
                 <View style={styles.body}>
                 
                     <TouchableHighlight style={{ alignItems:'center' }}>
@@ -139,15 +143,18 @@ export default class ICanHelp extends Component{
  
 
                 </View>
-            </ImageBackground>
+            
             </View>
+            </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
     main:{
-        justifyContent:'center'
+        justifyContent:'center',
+        height:"90%",
+        marginBottom:20
     },
     ImgBg:{
         width:"100%",
