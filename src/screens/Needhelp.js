@@ -10,9 +10,9 @@ import {
     } from 'react-native';
  
 
+    import ViButton from '../components/CustomsComponent'
 
-
-
+    
 export default class Needhelp extends Component{
     static navigationOptions = {
         title: 'I need help',
@@ -22,7 +22,15 @@ export default class Needhelp extends Component{
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-        },
+        },headerRight: (
+            <TouchableOpacity
+              onPress={() => alert('hi \nThis is vishnukumar\nDeveloper')} 
+            >
+            <Image
+            source={require('../../res/img/Info_64px.png')} 
+            />
+            </TouchableOpacity>
+          )
       };
       
     constructor(props) {
@@ -56,7 +64,7 @@ export default class Needhelp extends Component{
         if (this.state.needs == ''){
             alert('Enter the address needs');
             return;
-        }
+        } 
 
 
         fetch('http://169.254.180.17/test.php', {
@@ -65,16 +73,17 @@ export default class Needhelp extends Component{
               Accept: 'application/json',
               'Content-Type': 'application/json',
             },
-            body:JSON.stringify({
-                method      :   'helprequest',
+            body: JSON.stringify({
+                method      :   "helprequest",
                 address1    :   this.state.address1,
                 address2    :   this.state.address2,
                 city        :   this.state.city,
                 needs       :   this.state.needs
-            }),
+            })
           }).then((response) => response.json())
-               
-              .catch((error) => {
+          .then((responseJson) => {  
+                alert(responseJson);
+          }).catch((error) => {
                 console.error(error);
               });
       }
@@ -147,10 +156,11 @@ export default class Needhelp extends Component{
                  
 
                 
-                    
-                    <TouchableOpacity onPress={this._onSubmit}> 
+                <ViButton label="Submit" postPressed={this._onSubmit} marginTop={5} />
+
+                    {/* <TouchableOpacity onPress={this._onSubmit}> 
                         <Image style={{ width:'100%', borderRadius:5, marginTop:8 }} source={require('../../res/img/submit.png')}/> 
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </ScrollView>
             

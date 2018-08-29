@@ -3,7 +3,7 @@ import {
     StyleSheet, View, Image,
      Button, Text,
       ImageBackground,
-      TextInput,
+      Picker,
       ScrollView,
       TouchableHighlight,
       FlatList,
@@ -55,14 +55,22 @@ import {
 export default class ICanHelp extends Component{
 
     static navigationOptions = {
-        title: 'I can help',
+        title: 'I Can help',
         headerStyle: {
           backgroundColor: '#000',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-        },
+        },headerRight: (
+            <TouchableOpacity
+              onPress={() => alert('hi \nThis is vishnukumar\nDeveloper')} 
+            >
+            <Image
+            source={require('../../res/img/Info_64px.png')} 
+            />
+            </TouchableOpacity>
+          )
       };
       
     constructor(props) {
@@ -71,14 +79,14 @@ export default class ICanHelp extends Component{
           text: '',
           data: [ ],
           loaded: false,
+          district:''
         }; 
 
         this._fetchFromServer();
       }
 
 
-      _fetchFromServer = () => {
-        
+      _fetchFromServer = () => { 
         fetch('http://169.254.180.17/test.php', {
             method: 'POST',
             headers: {
@@ -88,8 +96,11 @@ export default class ICanHelp extends Component{
              body:JSON.stringify({
                 method:'needs'
             })
-          }).then((response) => response.json())
-              .then((responseJson) => {  
+          }).then(response => {
+            console.log(JSON.stringify(response, null, 4))
+            return response.json()
+        })
+              .then((responseJson) => { 
                   this.setState({data: responseJson, loaded: true});
                 return  responseJson; 
               })
@@ -130,7 +141,19 @@ export default class ICanHelp extends Component{
                     </TouchableHighlight>
                     
                     <Text style={styles.label}>District</Text>
-                    <TextInput style={styles.input}/>
+                    <Picker 
+                        selectedValue={this.state.district}
+                        style={{backgroundColor:'white'}} 
+                        itemStyle={{backgroundColor:'white'}} 
+                        onValueChange={(itemValue, itemIndex) => this.setState({district: itemValue})}>
+
+                        <Picker.Item label="Kollam" value="kollam" />
+                        <Picker.Item label="Trivandrum" value="trivandrum" />
+                        <Picker.Item label="Kozhikkodu" value="kozhikkodu" />
+                        <Picker.Item label="Alappuzha" value="alappuzha" />
+                    </Picker>
+
+
     <Text display={ !this.state.loaded }>Loading...</Text>
       <FlatList
         // data={this._fetchFromServer}

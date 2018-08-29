@@ -3,7 +3,7 @@ import {
     StyleSheet, View, Image,
      Button, Text,
       ImageBackground,
-      TextInput,
+      Picker,
       ScrollView,
       TouchableHighlight,
       FlatList,
@@ -49,15 +49,23 @@ import {
 
 export default class HelpLines extends Component{
  
-      static navigationOptions = {
-        title: 'Help lines',
+    static navigationOptions = {
+        title: 'Helplines',
         headerStyle: {
           backgroundColor: '#000',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
           fontWeight: 'bold',
-        },
+        },headerRight: (
+            <TouchableOpacity
+              onPress={() => alert('hi \nThis is vishnukumar\nDeveloper')} 
+            >
+            <Image
+            source={require('../../res/img/Info_64px.png')} 
+            />
+            </TouchableOpacity>
+          )
       };
       
       
@@ -124,7 +132,19 @@ export default class HelpLines extends Component{
                     </TouchableHighlight>
                     
                     <Text style={styles.label}>District</Text>
-                    <TextInput style={styles.input}/>
+                    <Picker 
+                        selectedValue={this.state.district}
+                        style={{backgroundColor:'white'}} 
+                        itemStyle={{backgroundColor:'white'}} 
+                        onValueChange={(itemValue, itemIndex) => this.setState({district: itemValue})}>
+
+                        <Picker.Item label="Kollam" value="kollam" />
+                        <Picker.Item label="Trivandrum" value="trivandrum" />
+                        <Picker.Item label="Kozhikkodu" value="kozhikkodu" />
+                        <Picker.Item label="Alappuzha" value="alappuzha" />
+                    </Picker>
+
+
     <Text display={ !this.state.loaded }>Loading...</Text>
       <FlatList
         // data={this._fetchFromServer}

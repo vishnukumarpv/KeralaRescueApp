@@ -1,14 +1,45 @@
 import React, { Component } from 'react';
-import { TouchableHighlight, Image } from 'react-native';
+import { TouchableHighlight, Image, Text, View } from 'react-native';
 
-export class CustomsComponent2 extends Component {
-  componentName = 'CustomsComponent2';
+ class ViButton extends Component { 
+   constructor(props){
+     super(props);
+     this.props = {
+        label : 'submit'
+     };
+     
+   } 
+
     render() {
         return (
-        <TouchableHighlight > 
-          <Image style={{ width:'100%', borderRadius:5, marginTop:8 }} 
-          source={require('../../res/img/submit.png')}/> 
+        <TouchableHighlight
+        onPress={this.props.postPressed}
+        style={{
+          height:45,
+          borderRadius:5,
+          width:'100%',
+          backgroundColor:'#11BE73',
+          justifyContent:'center',
+          alignItems:'center',  
+          marginTop: this.props.marginTop
+        }}> 
+        <View
+        style={{ flexDirection:'row' }}
+        >
+            <Text style={{
+              color:'#fff',
+              fontSize:20,
+            }}>
+            {this.props.label}
+            </Text>
+              <Image 
+              style={{ height:22,width:35, marginTop:3, marginLeft:"3%" }}
+              source={require('../../res/img/Right_Arrow_50px.png')}/> 
+        </View>
+
         </TouchableHighlight>
         );
       }
 }
+
+export default ViButton

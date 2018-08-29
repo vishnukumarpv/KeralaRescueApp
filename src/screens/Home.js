@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Image, TouchableOpacity, ImageBackground } from 'react-native';
+
+
  
 
 export default class Home extends Component{
-    static navigationOptions = { header: null };
+    static navigationOptions = {  
+        headerStyle: {
+            backgroundColor: '#000',
+          },
+        headerRight: (
+        <TouchableOpacity
+          onPress={() => alert('hi \nThis is vishnukumar\nDeveloper')} 
+        >
+        <Image
+        source={require('../../res/img/Info_64px.png')} 
+        />
+        </TouchableOpacity>
+      ) };
     render(){
         return(
             <View style={styles.main}>
@@ -41,18 +55,18 @@ export default class Home extends Component{
                 </View>
 
                 <View style={styles.body_lays}>
-                    <TouchableOpacity style={styles.touchable_g}>
-                        <Image
-                        style={styles.img_btn} 
-                        source={require('../../res/img/donate.png')}
-                        />
-                    </TouchableOpacity>
-
                     <TouchableOpacity style={styles.touchable_g}
                     onPress={() => this.props.navigation.navigate('HelpLines')}>
                         <Image
                         style={styles.img_btn} 
                         source={require('../../res/img/helpline.png')}
+                        />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.touchable_g}>
+                        <Image
+                        style={styles.img_btn} 
+                        source={require('../../res/img/donate.png')}
                         />
                     </TouchableOpacity>
 
